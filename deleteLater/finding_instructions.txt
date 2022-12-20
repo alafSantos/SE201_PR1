@@ -1,0 +1,3 @@
+Firstly, I put every single instruction in a assembly file as follow ".word 0x00050893" after I used the commands:
+riscv64-unknown-elf-gcc -c instructions.s
+riscv64-unknown-elf-objdump -d instructions.o
