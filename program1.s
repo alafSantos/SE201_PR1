@@ -20,9 +20,9 @@ a2_eq_0:
     bne     a5,a7, if_5 #0x24
     ret     #jalr x0,ra
 a0_eq_0:
-    li      a0,-1
+    li      a0,-1 #pseudo to addi a0,x0,-1
     ret     #jalr x0,ra
 a1_eq_0:
-    li      a0,-1
+    li      a0,-1 #pseudo to addi a0,x0,-1
 a3_le_0:
     ret     #jalr x0,ra
