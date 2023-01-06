@@ -1,9 +1,9 @@
 addi    a7,a0,0x00
 addi    a0,a3,0x00
-beqz    a7,0x48
-beqz    a1,0x50
-beqz    a2,0x50
-blez    a3,0x54
+beq     a7,zero,[0x40 + PC] 0x48
+beq     a1,zero,0x50
+beq     a2,zero,0x50
+bge     a3,zero,0x54
 addi    a5,a7,0x00
 slli    a4,a3,0x2
 add     a7,a7,a4
