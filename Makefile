@@ -5,18 +5,19 @@ OBJDUMP = $(PREFIX)objdump
 
 WARNINGS = -Wall
 CFLAGS = -g -O0 -mcmodel=medlow -mabi=ilp32 -march=rv32im $(WARNINGS) -c
-OBJS = se201-prog.o
-EXE = main
-OBJ = main.o
+OBJ1 = se201-prog.o
+SOURCE_C1 = se201-prog.c
+
+OBJ2 = se201-prog-short.o
+SOURCE_C2 = se201-prog-short.c
+
+OBJ = program1.o
 SOURCE = $(wildcard *.s)
 C_OBJS = $(subst .c,.o,$(wildcard *.c))
 $(info $C_OBJS)
 .PHONY: clean
 
-all: $(EXE)
-
-$(EXE):$(OBJS)
-	 $(LD) $(LDFLAGS) $^ -o $@
+all: $(OBJ)
 
 $(OBJ):$(SOURCE)
 	$(AS) $^ -o $@
@@ -30,5 +31,17 @@ compile: $(C_OBJS)
 objdump:$(OBJS)
 	 $(OBJDUMP) -d $^
 
+$(OBJ1):$(SOURCE_C1)
+	 $(CC) $(CFLAGS) $^ -o $@
+
+$(OBJ2):$(SOURCE_C2)
+	 $(CC) $(CFLAGS) $^ -o $@
+
+objdump1:$(OBJ1)
+	 $(OBJDUMP) -d $^
+
+objdump2:$(OBJ2)
+	 $(OBJDUMP) -d $^
+
 clean:
-	rm -f $(OBJS) $(EXE) *.o
+	rm -f $(OBJS) $(OBJ) $(EXE) *.o
