@@ -15,11 +15,18 @@ SOURCE_C2 = se201-prog-short.c
 OBJ = program1.o
 SOURCE = $(wildcard *.s)
 
+C_OBJS = $(subst .c,.o,$(wildcard *.c))
+
 CLEAN = $(OBJ) $(OBJ1) $(OBJ2) 
 
 .PHONY: clean
 
 all: $(OBJ)
+
+compile: $(C_OBJS)
+
+%.o : %.c
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ):$(SOURCE)
 	$(AS) $^ -o $@
@@ -40,7 +47,7 @@ objdump2:$(OBJ2)
 	 $(OBJDUMP) -d $^
 
 clean:
-	rm -f $(CLEAN)
+	rm -f $(CLEAN) *.o
 
 info:
 	@echo "\t\t----COMMAND LIST-----"
