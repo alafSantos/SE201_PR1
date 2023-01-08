@@ -1,4 +1,4 @@
-PREFIX = riscv64-unknown-elf-
+PREFIX = riscv64-linux-gnu-
 CC = $(PREFIX)gcc
 AS = $(PREFIX)as
 OBJDUMP = $(PREFIX)objdump
@@ -9,7 +9,8 @@ OBJS = se201-prog.o
 EXE = main
 OBJ = main.o
 SOURCE = $(wildcard *.s)
-
+C_OBJS = $(subst .c,.o,$(wildcard *.c))
+$(info $C_OBJS)
 .PHONY: clean
 
 all: $(EXE)
@@ -20,8 +21,14 @@ $(EXE):$(OBJS)
 $(OBJ):$(SOURCE)
 	$(AS) $^ -o $@
 
-objdump:$(OBJ)
+compile: $(C_OBJS)
+
+%.o : %.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+
+objdump:$(OBJS)
 	 $(OBJDUMP) -d $^
 
 clean:
-	rm -f $(OBJS) $(EXE)
+	rm -f $(OBJS) $(EXE) *.o
