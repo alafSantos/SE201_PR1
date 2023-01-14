@@ -30,8 +30,8 @@ for_loop: // count to 0
     pop s0  //expands to:
             //lw s0, 0(sp)
             //addi sp, 4
-    mv a0, a3
     ret //jr lr
+    mv a0, a3
     
 arg_0:
     //li a0, -1 //swapped with ret to exploit delay slot
