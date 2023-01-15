@@ -8,8 +8,8 @@ main:
     //expansion of li a1, 65408 // 0x0000ff80
     li a1, 0xff 
     slli a1,8
+
     //li a1, 0x80 // using the delay slot
-    
     call sum
     li a1, 0x80 
 
